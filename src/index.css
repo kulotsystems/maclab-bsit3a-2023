@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    background: gainsboro;
+}
+
+header > .container {
+    padding: 15px 8px;
+    display: flex;
+    align-items: center;
+    max-width: 1190px;
+    margin: auto;
+}
+
+header img {
+    border-radius: 50%;
+    width: 48px;
+}
+
+header .user-name {
+    margin-left: 8px;
+}
+
+header button {
+    margin-left: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px;
+}
+
+.title {
+    text-align: center;
+    margin: 25px 0;
+}
+
+main {
+    width: 100%;
+    overflow-x: auto;
+}
+
+main > table {
+    margin: auto;
+}
+
+main > table th,
+main > table td {
+    width: 85px;
+    min-width: 85px;
+    border: 1px solid gray;
+    text-align: center;
+    table-layout: fixed;
+    word-break: break-word;
+}
+
+main > table > thead > tr th,
+main > table > thead > tr td {
+    padding: 15px 0;
+}
+
+p {
+    margin: 0;
+}
+
+.seat {
+    padding: 8px 2px;
+}
+
+.seat.taken {
+    background: yellow;
+}
+
+.seat.taken.self {
+    background: lightgreen;
+}
