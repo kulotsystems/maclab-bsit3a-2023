@@ -18,7 +18,7 @@ export const Seat = (props: SeatProps) => {
     const seat = props.seat;
     const [loading, setLoading] = useState(false);
 
-    // pick
+    // handle picking of seat
     const handlePick = async () => {
         setLoading(true);
 
@@ -64,7 +64,7 @@ export const Seat = (props: SeatProps) => {
                         }
                     });
 
-                // update new seat
+                // update new record
                 await supabase
                     .from('seatplan')
                     .update({
@@ -96,17 +96,16 @@ export const Seat = (props: SeatProps) => {
             <h4 style={{marginTop: 0}}>MAC { seat.mac.num }</h4>
             { seat.student
                 ? (
-                    <div>
+                    <div className="content">
                         {
                             seat.student.name !== ''
                             ? <small>{seat.student.name}</small>
                             : <small>{seat.student.username}</small>
                         }
-
                     </div>
                 )
                 : (
-                    <div>
+                    <div className="content">
                         <p>&nbsp;</p>
                         { user && (
                             <div>

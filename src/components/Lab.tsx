@@ -7,7 +7,6 @@ import { SeatsType } from '../types/Seat.type';
 import supabase from '../config/supabase-client';
 import _ from 'lodash';
 
-
 export const Lab = () => {
     // global state
     const dispatch = useDispatch();
@@ -15,15 +14,18 @@ export const Lab = () => {
 
     // local state
     const [seats, setSeats] = useState<SeatsType | null>(null);
+    const [loading, setLoading] = useState(false);
 
-
+    // onload
     useEffect(() => {
         // get session
         const getSession = async () => {
+            setLoading(true);
+
             const { data, error } = await supabase.auth.getSession();
 
             if(error) {
-
+                alert(`UNABLE TO GET SESSION\n\n${error.message}`);
             }
 
             if(data) {
@@ -33,7 +35,7 @@ export const Lab = () => {
             }
         };
         getSession().then(r => {
-            // fetch seat plan
+            // get seat plan
             const getSeatPlan = async () => {
                 const { data, error } = await supabase
                     .from('seatplan')
@@ -41,7 +43,7 @@ export const Lab = () => {
                     .order('id');
 
                 if(error) {
-
+                    alert(`UNABLE TO GET SEAT PLAN\n\n${error.message}`);
                 }
 
                 if(data) {
@@ -65,7 +67,9 @@ export const Lab = () => {
                 }
             };
 
-            getSeatPlan().then(r => {});
+            getSeatPlan().then(r => {
+                setLoading(false);
+            });
         });
     }, []);
 
@@ -122,19 +126,24 @@ export const Lab = () => {
                 </div>
             </header>
 
-            <h2 className="title">BSIT-3A | SEAT PLAN FOR MAC LAB</h2>
+            <h2 className="title"><span style={{opacity: 0.6}}>BSIT-3A</span><br/>SEAT PLAN FOR MAC LAB</h2>
 
             <main>
+                { loading && (
+                    <p className="loader">
+                        Loading...
+                    </p>
+                )}
                 { seats && (
                     <>
                         <table>
                             <thead>
                                 <tr>
-                                    <th colSpan={6}></th>
+                                    <th colSpan={6} className="clear"></th>
                                     <th colSpan={2} align="center">
                                         Teacher's Table
                                     </th>
-                                    <th colSpan={6}></th>
+                                    <th colSpan={6} className="clear"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,8 +155,8 @@ export const Lab = () => {
                                     <td><Seat seat={seats.mac33} upd={upd}/></td>
                                     <td><Seat seat={seats.mac34} upd={upd}/></td>
                                     <td><Seat seat={seats.mac35} upd={upd}/></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td className="clear"></td>
+                                    <td className="clear"></td>
                                     <td><Seat seat={seats.mac36} upd={upd}/></td>
                                     <td><Seat seat={seats.mac37} upd={upd}/></td>
                                     <td><Seat seat={seats.mac38} upd={upd}/></td>
@@ -164,8 +173,8 @@ export const Lab = () => {
                                     <td><Seat seat={seats.mac27} upd={upd}/></td>
                                     <td><Seat seat={seats.mac26} upd={upd}/></td>
                                     <td><Seat seat={seats.mac20} upd={upd}/></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td className="clear"></td>
+                                    <td className="clear"></td>
                                     <td><Seat seat={seats.mac19} upd={upd}/></td>
                                     <td><Seat seat={seats.mac25} upd={upd}/></td>
                                     <td><Seat seat={seats.mac24} upd={upd}/></td>
@@ -182,8 +191,8 @@ export const Lab = () => {
                                     <td><Seat seat={seats.mac10} upd={upd}/></td>
                                     <td><Seat seat={seats.mac11} upd={upd}/></td>
                                     <td><Seat seat={seats.mac12} upd={upd}/></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td className="clear"></td>
+                                    <td className="clear"></td>
                                     <td><Seat seat={seats.mac13} upd={upd}/></td>
                                     <td><Seat seat={seats.mac14} upd={upd}/></td>
                                     <td><Seat seat={seats.mac15} upd={upd}/></td>
@@ -199,8 +208,8 @@ export const Lab = () => {
                                     <td colSpan={2}>PRINTER</td>
                                     <td><Seat seat={seats.mac6} upd={upd}/></td>
                                     <td><Seat seat={seats.mac5} upd={upd}/></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td className="clear"></td>
+                                    <td className="clear"></td>
                                     <td><Seat seat={seats.mac4} upd={upd}/></td>
                                     <td><Seat seat={seats.mac3} upd={upd}/></td>
                                     <td><Seat seat={seats.mac2} upd={upd}/></td>
