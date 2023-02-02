@@ -7,7 +7,6 @@ import { SeatsType } from '../types/Seat.type';
 import supabase from '../config/supabase-client';
 import _ from 'lodash';
 
-
 export const Lab = () => {
     // global state
     const dispatch = useDispatch();
@@ -15,15 +14,18 @@ export const Lab = () => {
 
     // local state
     const [seats, setSeats] = useState<SeatsType | null>(null);
+    const [loading, setLoading] = useState(false);
 
-
+    // onload
     useEffect(() => {
         // get session
         const getSession = async () => {
+            setLoading(true);
+
             const { data, error } = await supabase.auth.getSession();
 
             if(error) {
-
+                alert(`UNABLE TO GET SESSION\n\n${error.message}`);
             }
 
             if(data) {
@@ -33,7 +35,7 @@ export const Lab = () => {
             }
         };
         getSession().then(r => {
-            // fetch seat plan
+            // get seat plan
             const getSeatPlan = async () => {
                 const { data, error } = await supabase
                     .from('seatplan')
@@ -41,7 +43,7 @@ export const Lab = () => {
                     .order('id');
 
                 if(error) {
-
+                    alert(`UNABLE TO GET SEAT PLAN\n\n${error.message}`);
                 }
 
                 if(data) {
@@ -65,7 +67,9 @@ export const Lab = () => {
                 }
             };
 
-            getSeatPlan().then(r => {});
+            getSeatPlan().then(r => {
+                setLoading(false);
+            });
         });
     }, []);
 
@@ -125,6 +129,11 @@ export const Lab = () => {
             <h2 className="title"><span style={{opacity: 0.6}}>BSIT-3A</span><br/>SEAT PLAN FOR MAC LAB</h2>
 
             <main>
+                { loading && (
+                    <p className="loader">
+                        Loading...
+                    </p>
+                )}
                 { seats && (
                     <>
                         <table>
