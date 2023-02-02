@@ -6,7 +6,6 @@ body {
 
 header {
     background: gainsboro;
-    border: 1px solid green;
 }
 
 header > .container {
