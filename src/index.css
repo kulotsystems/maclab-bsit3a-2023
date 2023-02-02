@@ -6,13 +6,14 @@ body {
 
 header {
     background: gainsboro;
+    border: 1px solid green;
 }
 
 header > .container {
     padding: 15px 8px;
     display: flex;
     align-items: center;
-    max-width: 1190px;
+    max-width: 1262px;
     margin: auto;
 }
 
