@@ -96,7 +96,7 @@ export const Seat = (props: SeatProps) => {
             <h4 style={{marginTop: 0}}>MAC { seat.mac.num }</h4>
             { seat.student
                 ? (
-                    <div>
+                    <div className="content">
                         {
                             seat.student.name !== ''
                             ? <small>{seat.student.name}</small>
@@ -106,7 +106,7 @@ export const Seat = (props: SeatProps) => {
                     </div>
                 )
                 : (
-                    <div>
+                    <div className="content">
                         <p>&nbsp;</p>
                         { user && (
                             <div>
