@@ -1,10 +1,18 @@
 import '../assets/room.css';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn, signOut } from '../actions';
 import { Seat } from './Seat';
 import { SeatsType } from '../types/Seat.type';
+import supabase from '../config/supabase-client';
+
 
 export const Lab = () => {
     const [seats, setSeats] = useState<SeatsType | null>(null);
+
+    const dispatch = useDispatch();
+    const user:any = useSelector<any>(state => state.user);
+
 
     // populate seats
     useEffect(() => {
@@ -16,10 +24,54 @@ export const Lab = () => {
             }
         }
         setSeats(tempSeats);
+
+        const getSession = async () => {
+            const { data, error } = await supabase.auth.getSession();
+
+            if(error) {
+
+            }
+
+            if(data) {
+                const identities = data.session?.user.identities;
+                if(identities)
+                    dispatch(signIn(identities[0]));
+            }
+        };
+
+        getSession().then(r => {});
     }, []);
+
+
+    // sign in
+    const handleSignIn = async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'github'
+        });
+    };
+
+    // sign out
+    const handleSignOut = async () => {
+        const { error } = await supabase.auth.signOut();
+        if(!error)
+            dispatch(signOut());
+    };
 
     return (
         <div>
+            { user
+                ? (
+                    <div>
+                        <div>User: { user.identity_data.full_name }</div>
+                        <button onClick={handleSignOut}>Sign out</button>
+                    </div>
+                )
+                : (
+                    <button onClick={handleSignIn}>Sign in</button>
+                )
+            }
+
+
             { seats && (
                 <table border={1} cellSpacing={0}>
                     <thead>
