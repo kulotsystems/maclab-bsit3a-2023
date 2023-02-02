@@ -21,6 +21,12 @@ header img {
     width: 48px;
 }
 
+header .img-placeholder {
+    height: 48px;
+    display: inline-block;
+    visibility: hidden;
+}
+
 header .user-name {
     margin-left: 8px;
 }

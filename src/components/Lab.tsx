@@ -120,7 +120,10 @@ export const Lab = () => {
                             </>
                         )
                         : (
-                            <button onClick={handleSignIn}>Sign in with GitHub</button>
+                            <>
+                                <div className="img-placeholder"></div>
+                                <button onClick={handleSignIn}>Sign in with GitHub</button>
+                            </>
                         )
                     }
                 </div>
