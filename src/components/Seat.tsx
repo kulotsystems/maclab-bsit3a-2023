@@ -98,9 +98,9 @@ export const Seat = (props: SeatProps) => {
                 ? (
                     <div className="content">
                         {
-                            seat.student.name !== ''
-                            ? <small>{seat.student.name}</small>
-                            : <small>{seat.student.username}</small>
+                            (seat.student.name == '' || !seat.student.name)
+                            ? <small><i>@{seat.student.username}</i></small>
+                            : <small>{seat.student.name}</small>
                         }
                     </div>
                 )
