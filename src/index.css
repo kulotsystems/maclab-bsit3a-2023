@@ -44,8 +44,9 @@ header button {
 }
 
 main {
-    width: 100%;
+    width: calc(100% - 16px);
     overflow-x: auto;
+    padding: 8px;
 }
 
 main > table {
@@ -74,6 +75,12 @@ p {
     margin: 0;
 }
 
+.teacher-table {
+    display: inline-block;
+    border: 1px solid gray;
+    padding: 20px 15px;
+}
+
 .seat {
     padding: 8px 2px;
     display: flex;
@@ -89,6 +96,7 @@ p {
 
 .seat > .content {
     padding-bottom: 4px;
+    line-height: 11px;
 }
 
 .seat.taken {
