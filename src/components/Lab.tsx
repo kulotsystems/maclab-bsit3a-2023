@@ -143,8 +143,10 @@ export const Lab = () => {
                             <thead>
                                 <tr>
                                     <th colSpan={6} className="clear"></th>
-                                    <th colSpan={2} align="center">
-                                        Teacher's Table
+                                    <th colSpan={2} align="center" className="clear">
+                                        <div className="teacher-table">
+                                            Teacher's Table
+                                        </div>
                                     </th>
                                     <th colSpan={6} className="clear"></th>
                                 </tr>
