@@ -43,6 +43,12 @@ header button {
     margin: 25px 0;
 }
 
+.title span {
+    opacity: 0.6;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
 main {
     width: calc(100% - 16px);
     overflow-x: auto;
