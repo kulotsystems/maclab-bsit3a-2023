@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import useMembers from '../hooks/useMembers';
 import { signIn, signOut } from '../actions';
 import { Seat } from './Seat';
+import { Undecided } from './Undecided';
 import { StudentType } from '../types/Student.type';
 import { SeatsType } from '../types/Seat.type';
 import supabase from '../config/supabase-client';
@@ -15,6 +17,8 @@ export const Lab = () => {
     // local state
     const [seats, setSeats] = useState<SeatsType | null>(null);
     const [loading, setLoading] = useState(false);
+
+    const members = useMembers();
 
     // onload
     useEffect(() => {
@@ -226,6 +230,12 @@ export const Lab = () => {
                     </>
                 )}
             </main>
+
+            { seats && (
+                <footer>
+                    <Undecided seats={seats} members={members}/>
+                </footer>
+            )}
         </div>
     );
 };

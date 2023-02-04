@@ -127,3 +127,17 @@ small {
     text-align: center;
     opacity: 0.7;
 }
+
+.undecided {
+    padding: 15px 8px;
+    text-align: center;
+    word-break: break-word;
+}
+
+.undecided .member {
+    margin-right: 8px;
+}
+
+.undecided a {
+    text-decoration: none;
+}
